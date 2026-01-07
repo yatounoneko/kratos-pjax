@@ -82,16 +82,19 @@ function user_agent_show(){
         }
     }elseif(preg_match('/Mac/i',$useragent)||preg_match('/Darwin/i',$useragent)){
         $title = 'Mac';
-        $code = 'mac-3';
         if(preg_match('/Mac OS X/i',$useragent)||preg_match('/Mac OSX/i',$useragent)){
-            // 安全提取版本(PHP8.5)
-            if(preg_match('/Mac OS X\s*([._0-9]+)/i',$useragent,$regmatch)){
-                $version = 'OS X '.str_replace('_','.',$regmatch[1]);
-            }elseif(preg_match('/OSX\s*([._0-9]+)/i',$useragent,$regmatch)){
-                $version = 'OS X '.str_replace('_','.',$regmatch[1]);
+            if(preg_match('/Mac OS X/i',$useragent)){
+                $version = substr($useragent,strpos(strtolower($useragent),strtolower('OS X'))+4);
+                $code = 'mac-3';
             }else{
-                $version = 'OS X';
+                $version = substr($useragent,strpos(strtolower($useragent),strtolower('OSX'))+3);
+                $code = 'mac-2';
             }
+            $version = substr($version,0,strpos($version,')'));
+            if(strpos($version,';') > -1) $version = substr($version,0,strpos($version,';'));
+            $version = str_replace('_','.',$version);
+            if($wpua_show_version==='simple'&&preg_match('/([0-9]+\.[0-9]+)/i',$version,$regmatch)) $version = $regmatch[1];
+            $version = (empty($version))?'OS X':"OS X $version";
         }elseif(preg_match('/Darwin/i',$useragent)){
             $version = 'OS Darwin';
             $code = 'mac-1';
@@ -138,7 +141,7 @@ function user_agent_show(){
     }elseif(preg_match('/Windows/i',$useragent)||preg_match('/WinNT/i',$useragent)||preg_match('/Win32/i',$useragent)){
         $title = 'Windows';
         if(preg_match('/Windows NT 10.0/i',$useragent)||preg_match('/Windows NT 6.4/i',$useragent)){
-            $version = '10';
+            $version = '10/11';
             $code = 'win-6';
         }elseif(preg_match('/Windows NT 6.3/i',$useragent)){
             $version = '8.1';
@@ -418,18 +421,43 @@ function user_agent_show(){
         $bcode = 'msie';
     }
     if($title&&$btitle){
-        return '<div class="useragent"><img src="'.get_template_directory_uri().'/static/images/ua/'.$bcode.'.png" style="margin-top:-3px;width:16px;height:16px"> '.$btitle.' <img src="'.get_template_directory_uri().'/static/images/ua/'.$code.'.png" style="margin-left:5px;margin-top:-3px;width:16px;height:16px"> '.$title.' '.$version.'</div>';
+        if(kratos_option('owo_out')) $uapic = 'https://cdn-js.moeworld.top/gh/KJZH001/Moe-kratos-pjax@'.KRATOS_VERSION; else $uapic = get_bloginfo('template_directory');
+        return '<div class="useragent"><img src="'.$uapic.'/static/images/ua/'.$bcode.'.png" style="margin-top:-3px;width:16px;height:16px"> '.$btitle.' <img src="'.$uapic.'/static/images/ua/'.$code.'.png" style="margin-left:5px;margin-top:-3px;width:16px;height:16px"> '.$title.' '.$version.'</div>';
     }else return null;
 }
-function user_agent_display_comment(){
-    global $comment;
-    remove_filter('comment_text','user_agent');
-    apply_filters('get_comment_text',$comment->comment_content);
-    if(empty($_POST['comment_post_ID'])||is_admin()) echo convert_smilies(apply_filters('get_comment_text',$comment->comment_content));
+// Let us stand on the giant's wheel! :) (https://github.com/KJZH001/Moe-kratos-pjax/blob/master/inc/ua.php)
+// 上游默认
+// function user_agent_display_comment(){
+//     global $comment;
+//     remove_filter('comment_text','user_agent');
+//     apply_filters('get_comment_text',$comment->comment_content);
+//     if(empty($_POST['comment_post_ID'])||is_admin()) echo convert_smilies(apply_filters('get_comment_text',$comment->comment_content));
+// }
+// function user_agent(){
+//     echo user_agent_show();
+//     user_agent_display_comment();
+//     add_filter('comment_text','user_agent');
+// }
+// add_filter('comment_text','user_agent');
+
+// 2025.6.26 能修复评论换行问题的改法1
+// function user_agent( $text ) {
+//     $ua  = user_agent_show();
+//     $txt = convert_smilies( $text );
+//     return $ua . wpautop( $txt );   // 用 return 替换所有 echo
+// }
+// add_filter('comment_text','user_agent');
+
+/**
+ * 2025.6.26 能修复评论换行问题的改法2
+ * 在评论内容前插入 UA 图标，同时保留换行、段落。
+ */
+function comment_text_with_ua( $text, $comment ) {
+    $ua_html = user_agent_show();          // 生成 UA 图标 / 文本
+    $text    = convert_smilies( $text );   // 保留原作者想要的表情
+    return $ua_html . wpautop( $text );    // 用 wpautop 生成 <p> 与 <br>
 }
-function user_agent(){
-    echo user_agent_show();
-    user_agent_display_comment();
-    add_filter('comment_text','user_agent');
-}
-add_filter('comment_text','user_agent');
+
+/* 先移除旧的有问题的钩子，再挂上新的 */
+remove_filter( 'comment_text', 'user_agent', 10 );
+add_filter( 'comment_text', 'comment_text_with_ua', 30, 2 );
