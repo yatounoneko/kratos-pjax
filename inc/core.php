@@ -129,7 +129,7 @@ remove_filter('the_content_feed','wp_staticize_emoji');
 remove_filter('comment_text_rss','wp_staticize_emoji');
 remove_filter('wp_mail','wp_staticize_emoji_for_email');
 add_filter('emoji_svg_url','__return_false');
-add_filter('show_admin_bar','__return_false');
+//add_filter('show_admin_bar','__return_false');
 add_action('wp_enqueue_scripts','mt_enqueue_scripts',1);
 //add_filter('rest_enabled','_return_false');
 //add_filter('rest_jsonp_enabled','_return_false');
