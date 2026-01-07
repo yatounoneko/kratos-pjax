@@ -17,7 +17,7 @@
             <span class="pull-left">
             <a href="<?php the_permalink() ?>"><i class="fa fa-eye"></i> <?php echo kratos_get_post_views();_e('次阅读','moedog'); ?></a>
             <a href="javascript:;" data-action="love" data-id="<?php the_ID(); ?>" class="Love<?php if(isset($_COOKIE['love_'.$post->ID])) echo ' done';?>"><i class="fa fa-thumbs-o-up"></i> <?php if(get_post_meta($post->ID,'love',true)) echo get_post_meta($post->ID,'love',true); else echo '0';_e('人点赞','moedog'); ?></a>
-            <a href="<?php site_url() ?>/?author=<?php the_author_ID() ?>"><i class="fa fa-user"></i> <?php the_author(); ?></a>
+            <a href="<?php site_url() ?>/?author=<?php the_author_meta('ID') ?>"><i class="fa fa-user"></i> <?php the_author(); ?></a>
             </span>
         </div>
     </header>
@@ -48,7 +48,7 @@
         <span class="visible-lg visible-md visible-sm pull-left">
             <a href="<?php the_permalink() ?>"><i class="fa fa-eye"></i> <?php echo kratos_get_post_views();_e('次阅读','moedog'); ?></a>
             <a href="javascript:;" data-action="love" data-id="<?php the_ID(); ?>" class="Love<?php if(isset($_COOKIE['love_'.$post->ID])) echo ' done';?>"><i class="fa fa-thumbs-o-up"></i> <?php if(get_post_meta($post->ID,'love',true)) echo get_post_meta($post->ID,'love',true); else echo '0';_e('人点赞','moedog'); ?></a>
-            <a href="<?php site_url() ?>/?author=<?php the_author_ID() ?>"><i class="fa fa-user"></i> <?php the_author(); ?></a>
+            <a href="<?php site_url() ?>/?author=<?php the_author_meta('ID') ?>"><i class="fa fa-user"></i> <?php the_author(); ?></a>
         </span>
         <span class="pull-right">
             <a class="read-more" href="<?php the_permalink() ?>" title="<?php _e('阅读全文','moedog'); ?>"><?php _e('阅读全文','moedog'); ?> <i class="fa fa-chevron-circle-right"></i></a>
