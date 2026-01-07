@@ -78,16 +78,16 @@ add_filter('excerpt_more','kratos_excerpt_more');
 //Load scripts
 function kratos_theme_scripts(){
     if(!is_admin()){
-        wp_enqueue_style('fontawe',get_bloginfo('template_directory').'/static/css/font-awesome.min.css',array(),'4.7.0');
-        wp_enqueue_style('kratos',get_bloginfo('template_directory').'/static/css/kratos.min.css',array(),KRATOS_VERSION);
-        wp_enqueue_script('theme-jq',get_bloginfo('template_directory').'/static/js/jquery.min.js',array(),'2.1.4');
-        wp_enqueue_script('theme',get_bloginfo('template_directory').'/static/js/theme.min.js',array(),KRATOS_VERSION);
-        wp_enqueue_script('kratos',get_bloginfo('template_directory').'/static/js/kratos.js',array(),KRATOS_VERSION);
-        if(kratos_option('page_pjax')) wp_enqueue_script('pjax',get_bloginfo('template_directory').'/static/js/pjax.js',array(),KRATOS_VERSION);
+        wp_enqueue_style('fontawe',get_template_directory_uri().'/static/css/font-awesome.min.css',array(),'4.7.0');
+        wp_enqueue_style('kratos',get_template_directory_uri().'/static/css/kratos.min.css',array(),KRATOS_VERSION);
+        wp_enqueue_script('theme-jq',get_template_directory_uri().'/static/js/jquery.min.js',array(),'2.1.4');
+        wp_enqueue_script('theme',get_template_directory_uri().'/static/js/theme.min.js',array(),KRATOS_VERSION);
+        wp_enqueue_script('kratos',get_template_directory_uri().'/static/js/kratos.js',array(),KRATOS_VERSION);
+        if(kratos_option('page_pjax')) wp_enqueue_script('pjax',get_template_directory_uri().'/static/js/pjax.js',array(),KRATOS_VERSION);
     }
     if(kratos_option('site_girl')&&!wp_is_mobile()){
-        wp_enqueue_script('live2d',get_bloginfo('template_directory').'/static/js/live2d.js',array(),'l2d');
-        wp_enqueue_script('waifu',get_bloginfo('template_directory').'/static/js/waifu-tips.js',array(),'1.3');
+        wp_enqueue_script('live2d',get_template_directory_uri().'/static/js/live2d.js',array(),'l2d');
+        wp_enqueue_script('waifu',get_template_directory_uri().'/static/js/waifu-tips.js',array(),'1.3');
     }
     $site_sa_h = 0;
     if(kratos_option('site_sa')&&!wp_is_mobile()){if(kratos_option('head_mode')=='pic') $site_sa_h = 61; else $site_sa_h = 103;}
@@ -99,7 +99,7 @@ function kratos_theme_scripts(){
           'copy'=> kratos_option('copy_notice'),
       'ajax_url'=> admin_url('admin-ajax.php'),
          'order'=> get_option('comment_order'),
-           'owo'=> get_bloginfo('template_directory'),
+           'owo'=> get_template_directory_uri(),
        'site_sh'=> $site_sa_h
     );
     wp_localize_script('kratos','xb',$d2kratos);
@@ -560,7 +560,7 @@ function rssinfo(){
         $rssurl=get_permalink();
     }else{
         $rsstitle=get_bloginfo('name');
-        $rssurl=get_bloginfo('home');
+        $rssurl=home_url();
     }
     echo '<link rel="alternate" type="application/rss+xml" title="'.$rsstitle.' &raquo; RSS 2.0" href="'.$rssurl.'/feed/" />
     <link rel="alternate" type="application/atom+xml" title="'.$rsstitle.' &raquo; ATOM 1.0" href="'.$rssurl.'/atom/" />
