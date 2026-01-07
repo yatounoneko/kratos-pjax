@@ -286,7 +286,7 @@ function get_client_ip(){
 add_action('wp_login','insert_last_login');
 function insert_last_login($login){
     global $user_id;
-    $user = get_user_by('login');
+    $user = get_user_by('login', $login);
     update_user_meta($user->ID,'last_login',current_time('mysql'));
     $last_login_ip = get_client_ip();
     update_user_meta($user->ID,'last_login_ip',$last_login_ip);
