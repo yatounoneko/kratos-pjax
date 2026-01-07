@@ -268,9 +268,8 @@ class kratos_widget_tags extends WP_Widget {
         echo $result;
     }
     function update($new_instance,$old_instance){
-        if(!isset($new_instance['submit'])) return false;
         $instance = $old_instance;
-        $instance['title'] = esc_attr($new_instance['title']);
+        $instance['title'] = sanitize_text_field($new_instance['title']); // V4 推薦加 sanitize
         $instance['number'] = intval($new_instance['number']);
         $instance['orderby'] = esc_attr($new_instance['orderby']);
         $instance['order'] = esc_attr($new_instance['order']);
@@ -363,7 +362,6 @@ class kratos_widget_posts extends WP_Widget {
         </aside><?php
     }
     function update($new_instance,$old_instance){
-        if(!isset($new_instance['submit'])) return false;
         $instance = $old_instance;
         $instance['number'] = intval($new_instance['number']);
         return $instance;
