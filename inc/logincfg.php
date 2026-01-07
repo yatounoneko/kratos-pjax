@@ -70,8 +70,15 @@ function kratos_show_extra_register_fields(){ ?>
 }
 function kratos_check_extra_register_fields($login,$email,$errors){
     if($_POST['nickname']=='') $errors->add('no_nickname',__("<strong>错误</strong>：昵称一栏不能为空。",'moedog'));
-    if($_POST['password']!==$_POST['repeat_password']&&kratos_option('mail_reg')) $errors->add('passwords_not_matched',__("<strong>错误</strong>：两次输入的密码不一致。",'moedog'));
-    if(strlen($_POST['password'])<8&&kratos_option('mail_reg')) $errors->add('password_too_short',__("<strong>错误</strong>：密码长度必须大于8位。",'moedog'));
+    if (kratos_option('mail_reg')) {
+        if (!isset($_POST['password']) || !isset($_POST['repeat_password'])) {
+            $errors->add('password_missing', __("<strong>错误</strong>：密码字段缺失。",'moedog'));
+        } elseif ($_POST['password'] !== $_POST['repeat_password']) {
+            $errors->add('passwords_not_matched', __("<strong>错误</strong>：两次输入的密码不一致。",'moedog'));
+        } elseif (strlen($_POST['password']) < 8) {
+            $errors->add('password_too_short', __("<strong>错误</strong>：密码长度必须大于8位。",'moedog'));
+        }
+    }
     if($_POST['are_you_human']!=$_POST['num1']+$_POST['num2']) $errors->add('not_human',__("<strong>错误</strong>：验证码错误，请重试。",'moedog'));
 }
 function kratos_register_extra_fields($user_id){
