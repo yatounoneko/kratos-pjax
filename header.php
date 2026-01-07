@@ -20,7 +20,7 @@
     <meta property="og:site_name" content="<?php wp_title('-',true,'right'); ?>">
     <meta property="og:type" content="website">
     <meta property="og:description" content="<?php kratos_description(); ?>">
-    <meta property="og:url" content="<?php if(!is_home()) echo get_permalink(); else echo get_bloginfo('home'); ?>">
+    <meta property="og:url" content="<?php if(!is_home()) echo get_permalink(); else echo home_url(); ?>">
     <meta name="twitter:title" content="<?php wp_title('-',true,'right'); ?>">
     <meta name="twitter:description" content="<?php kratos_description(); ?>">
     <meta name="twitter:card" content="summary">
@@ -51,7 +51,7 @@
                         <div class="container">
                             <div class="nav-header">
                                 <?php if(kratos_option('head_mode')!='pic'): ?>
-                                <div class="color-logo"><a href="<?php echo get_option('home'); ?>"><?php if(!kratos_option('banner_logo')) echo bloginfo('name'); else echo '<img src="'.kratos_option('banner_logo').'">'; ?></a></div>
+                                <div class="color-logo"><a href="<?php echo home_url(); ?>"><?php if(!kratos_option('banner_logo')) echo bloginfo('name'); else echo '<img src="'.kratos_option('banner_logo').'">'; ?></a></div>
                                 <?php endif; ?>
                                 <?php $defaults = array('theme_location'=>'header_menu','container'=>'nav','container_id'=>'kratos-menu-wrap','menu_class'=>'sf-menu','menu_id'=>'kratos-primary-menu',);
                                 wp_nav_menu($defaults); ?>
@@ -64,7 +64,7 @@
                     <div class="kratos-overlay"></div>
                     <div class="kratos-cover kratos-cover_2 text-center">
                         <div class="desc desc2 animate-box">
-                            <a href="<?php echo get_bloginfo('url'); ?>"><h2><?php echo kratos_option('background_image_text1'); ?></h2><br><span><?php echo  kratos_option('background_image_text2'); ?></span></a>
+                            <a href="<?php echo home_url(); ?>"><h2><?php echo kratos_option('background_image_text1'); ?></h2><br><span><?php echo  kratos_option('background_image_text2'); ?></span></a>
                         </div>
                     </div>
                 </div>
