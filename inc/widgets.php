@@ -159,7 +159,7 @@ class kratos_widget_about extends WP_Widget {
         $imgurl = $instance['imgurl']?$instance['imgurl']:'';
         $bkimgurl = $instance['bkimgurl']?$instance['bkimgurl']:'';
         echo $before_widget;
-        if(!is_home()) $redirect = get_permalink(); else $redirect = get_bloginfo('home');?>
+        if(!is_home()) $redirect = get_permalink(); else $redirect = home_url();?>
         <div class="photo-background">
             <div class="photo-background" style="background:url(<?php if(!empty($bkimgurl)) echo $bkimgurl; else echo bloginfo('template_url')."/static/images/about.jpg"; ?>) no-repeat center center;-webkit-background-size:cover;background-size:cover"></div>
         </div>
