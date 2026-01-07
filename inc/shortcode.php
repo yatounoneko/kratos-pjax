@@ -253,33 +253,33 @@ function register_button_b($buttons){
     return $buttons;
 }
 function add_plugin($plugin_array){
-    $plugin_array['title'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['highlight'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['accordion'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['hide'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['heimu'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['kbd'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['mark'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['striped'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['bdbtn'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['ypbtn'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['music'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['youku'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['tudou'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['vqq'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['youtube'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['bilibili'] = get_bloginfo('template_url').'/inc/buttons/more.js';
+    $plugin_array['title'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['highlight'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['accordion'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['hide'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['heimu'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['kbd'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['mark'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['striped'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['bdbtn'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['ypbtn'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['music'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['youku'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['tudou'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['vqq'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['youtube'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['bilibili'] = get_template_directory_uri().'/inc/buttons/more.js';
     return $plugin_array;
 }
 function add_plugin_b($plugin_array){
-    $plugin_array['success'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['info'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['warning'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['danger'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['successbox'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['infoboxs'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['warningbox'] = get_bloginfo('template_url').'/inc/buttons/more.js';
-    $plugin_array['dangerbox'] = get_bloginfo('template_url').'/inc/buttons/more.js';
+    $plugin_array['success'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['info'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['warning'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['danger'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['successbox'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['infoboxs'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['warningbox'] = get_template_directory_uri().'/inc/buttons/more.js';
+    $plugin_array['dangerbox'] = get_template_directory_uri().'/inc/buttons/more.js';
     return $plugin_array;
 }
 function add_more_buttons($buttons){
@@ -296,7 +296,7 @@ function fa_get_wpsmiliestrans(){
     $wpsmilies = array_unique($wpsmiliestrans);
     foreach($wpsmilies as $alt => $src_path){
         $traimgna = substr($alt,1,-1);
-        $output .= '<a class="add-smily" data-smilies="'.$alt.'"><img src="'.get_bloginfo('template_directory').'/static/images/smilies/'.$traimgna.'.png"></a>';
+        $output .= '<a class="add-smily" data-smilies="'.$alt.'"><img src="'.get_template_directory_uri().'/static/images/smilies/'.$traimgna.'.png"></a>';
     }
     return $output;
 }
