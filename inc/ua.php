@@ -82,19 +82,16 @@ function user_agent_show(){
         }
     }elseif(preg_match('/Mac/i',$useragent)||preg_match('/Darwin/i',$useragent)){
         $title = 'Mac';
+        $code = 'mac-3';
         if(preg_match('/Mac OS X/i',$useragent)||preg_match('/Mac OSX/i',$useragent)){
-            if(preg_match('/Mac OS X/i',$useragent)){
-                $version = substr($useragent,strpos(strtolower($useragent),strtolower('OS X'))+4);
-                $code = 'mac-3';
+            // 安全提取版本(PHP8.5)
+            if(preg_match('/Mac OS X\s*([._0-9]+)/i',$useragent,$regmatch)){
+                $version = 'OS X '.str_replace('_','.',$regmatch[1]);
+            }elseif(preg_match('/OSX\s*([._0-9]+)/i',$useragent,$regmatch)){
+                $version = 'OS X '.str_replace('_','.',$regmatch[1]);
             }else{
-                $version = substr($useragent,strpos(strtolower($useragent),strtolower('OSX'))+3);
-                $code = 'mac-2';
+                $version = 'OS X';
             }
-            $version = substr($version,0,strpos($version,')'));
-            if(strpos($version,';') > -1) $version = substr($version,0,strpos($version,';'));
-            $version = str_replace('_','.',$version);
-            if($wpua_show_version==='simple'&&preg_match('/([0-9]+\.[0-9]+)/i',$version,$regmatch)) $version = $regmatch[1];
-            $version = (empty($version))?'OS X':"OS X $version";
         }elseif(preg_match('/Darwin/i',$useragent)){
             $version = 'OS Darwin';
             $code = 'mac-1';
