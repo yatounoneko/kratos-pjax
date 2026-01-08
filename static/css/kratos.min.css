@@ -616,7 +616,7 @@ a.comment-reply-link,a.comment-reply-login{text-decoration:none;padding:2px 5px;
 .OwO .OwO-body .OwO-bar .OwO-packages li{list-style-type:none;display:inline-block;line-height:30px;font-size:14px;padding:0 10px;margin-right:3px;margin-top:0;background:#fff!important;box-shadow:unset}
 .OwO .OwO-body .OwO-bar .OwO-packages li:nth-child(1){border-radius:0 0 0 3px}
 .OwO .OwO-body .OwO-bar .OwO-packages li:hover{background:#eee}
-.OwO .OwO-body .OwO-bar .OwO-packages .OwO-package-active{background:#eee!important;-webkit-transition:.3s;transition:.3s}
+.OwO .OwO-body .OwO-bar .OwO-packages .OwO-package-active{background:#eee;-webkit-transition:.3s;transition:.3s}
 .affix-top{position:relative}
 .affix{position:fixed;top:92px}
 .affix,.affix-bottom{width:293.31px}
