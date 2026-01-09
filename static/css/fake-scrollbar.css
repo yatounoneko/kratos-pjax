@@ -1,0 +1,90 @@
+/* 手機版 (<=768px)：完全停用假滾動條，讓主題原生滾動條顯示 */
+@media (max-width: 768px) {
+    .fake-scrollbar {
+        display: none !important;
+    }
+    #native-scrollbar-hide {
+        display: none !important;
+    }
+    html, body {
+        scrollbar-width: auto !important;  /* 恢復原生 */
+        -ms-overflow-style: auto !important;
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+        width: auto !important;  /* 讓主題樣式生效 */
+    }
+}
+
+/* 桌面版 (>=768px)：啟用假滾動條 */
+@media (min-width: 768px) {
+    .fake-scrollbar {
+        display: block !important;
+    }
+
+/* 假滾動條樣式 - 極簡風 */
+.fake-scrollbar {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: transparent;
+}
+
+.fake-scrollbar.visible {
+    opacity: 1;
+    pointer-events: auto !important;
+}
+
+.fake-thumb {
+    position: absolute;
+    right: 3px;
+    width: 6px;
+    background: rgba(140, 140, 140, 0.6);
+    border-radius: 3px;
+    transition: background 0.2s ease;
+    cursor: grab;
+    min-height: 40px;
+}
+
+.fake-scrollbar.visible .fake-thumb {
+    background: rgba(140, 140, 140, 0.9);
+}
+
+.fake-thumb:hover,
+.fake-thumb:active {
+    background: rgba(140, 140, 140, 1) !important;
+    cursor: grabbing !important;
+}
+
+/* === 新加的 CSS 部分：解釋如下 === */
+
+/* 1. 強制讓全局假滾動條永遠在最上層（蓋過 Live2D、header 等高 z-index 元素） */
+.fake-scrollbar[data-target-selector="html"] {
+    z-index: 2147483647 !important;  /* JavaScript 能設的最大整數值，幾乎不可能被蓋 */
+}
+
+/* 2. 內部元素的假滾動條樣式調整 */
+.fake-scrollbar:not([data-target-selector="html"]) {
+    width: 10px !important;
+    right: 0;
+}
+
+.fake-scrollbar:not([data-target-selector="html"]) .fake-thumb {
+    width: 6px;
+    right: 2px;
+}
+
+/* 3. 確保內部元素的原生滾動條（如果瀏覽器顯示）不會被假條完全蓋住，視覺上疊加 */
+textarea::-webkit-scrollbar,
+iframe::-webkit-scrollbar,
+[style*="overflow"]::-webkit-scrollbar {
+    width: 8px !important;
+    background: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb,
+iframe::-webkit-scrollbar-thumb,
+[style*="overflow"]::-webkit-scrollbar-thumb {
+    background: rgba(140, 140, 140, 0.5);
+    border-radius: 4px;
+}
