@@ -12,3 +12,4 @@ require_once(get_template_directory().'/inc/widgets.php');
 require_once(get_template_directory().'/inc/smtp.php');
 require_once(get_template_directory().'/inc/logincfg.php');
 require_once(get_template_directory().'/inc/avatars.php');
+require_once get_stylesheet_directory().'/inc/enqueue.php';
