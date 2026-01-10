@@ -309,9 +309,35 @@ jQuery(document).ready(function(jQuery) {
             data:jQuery(this).serialize()+'&action=ajax_comment',
             type:jQuery(this).attr('method'),
             beforeSend:addComment.createButterbar('正在提交'),
-            error:function(request){
+            error: function(request){
                 var t = addComment;
-                t.createButterbar(request.responseText)
+                try {
+                    var errorMsg = '提交出錯，請查看控制臺信息';
+                    
+                    try {
+                        var response = JSON.parse(request. responseText);
+                        if(response.error){
+                            errorMsg = response.error;
+                        }
+                    } catch(e) {
+                        // JSON 解析失敗 = Nginx 可能攔截了
+                        console.warn('⚠️ 無法解析 JSON，可能被 Nginx 攔截了 HTTP 請檢查配置是否有重定向error_page ' + request.status);
+                        console.warn('回應內容（HTML前 200 字）:', request.responseText.substring(0, 200));
+                        
+                        var text = request.responseText.replace(/<[^>]*>/g, '').trim();
+                        if(text && text.length > 0 && text.length < 100) {
+                            errorMsg = text;
+                        }
+                    }
+                    
+                    if(typeof layer !== 'undefined' && layer. msg && typeof layer.msg === 'function'){
+                        t.createButterbar(errorMsg);
+                    } else {
+                        alert(errorMsg);
+                    }
+                } catch(e) {
+                    alert('提交出錯，請查看控制臺信息');
+                }
             },
             success:function(data){
                 jQuery('textarea').each(function(){this.value = ''});
