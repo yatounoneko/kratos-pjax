@@ -2,11 +2,6 @@
 <img src="https://img.moedog.org/images/2019/08/21/kratos1.jpg" alt="KRATOS"/>
 </p>
 
-<p align="center">
-<a href="https://moedog.org"><img alt="Author" src="https://img.shields.io/badge/Author-Moedog-red.svg?style=flat-square"/></a>
-<img alt="License" src="https://img.shields.io/github/license/xb2016/kratos-pjax.svg?style=flat-square"/>
-</p>
-
  > :icecream: Wow, such a lovely WordPress theme
 
 ## Introduction
@@ -15,20 +10,8 @@
 
 ## Before start
 
-[DEPRECATED] Please use [Kratos V4](https://github.com/seatonjiang/kratos)
-
-此项目基于 Kratos V2，**当前已不再维护**，请使用 [Kratos V4 原项目](https://github.com/seatonjiang/kratos) 以获得支持与最佳体验
-
-## Supports
-
-**Docs**
-- [https://moedog.org/787.html](https://moedog.org/787.html)
-
-## Donate
-
-I accept donations through: Alipay / Wechat Pay / QQ Pay , thank you!
-
-- [https://pay.moedog.org](https://pay.moedog.org)
+ - 此項目Fork於狗子大佬的WordPress主題v0.4.4版本，僅爲最新的WordPress及其所需環境進行修復。
+ - 其餘功能隨緣增加或魔改，使用前請自行斟酌是否用於生產環境。
 
 ## Thanks
 
@@ -41,6 +24,7 @@ I accept donations through: Alipay / Wechat Pay / QQ Pay , thank you!
 **Projects**
 
   - [Kratos](https://github.com/seatonjiang/kratos)
+  - [Kratos-pjax](https://github.com/xb2016/kratos-pjax)
   - [Moe-Kratos-pjax](https://github.com/KJZH001/Moe-kratos-pjax)
   - [Sakura🌸](https://github.com/mashirozx/Sakura)
   - [Bootstrap](https://github.com/twbs/bootstrap)
@@ -62,5 +46,3 @@ I accept donations through: Alipay / Wechat Pay / QQ Pay , thank you!
 ## Author
 
 **Kratos-pjax** © [Vtrois](https://github.com/Vtrois), [Moedog](https://github.com/xb2016), Released under the [GPL-3.0](./LICENSE) License.<br>
-
-> Blog [moedog.org](https://moedog.org) · GitHub [@xb2016](https://github.com/xb2016) · Twitter [@moesdog](https://twitter.com/moesdog) · Telegram [@xb2016](https://t.me/xb2016)
